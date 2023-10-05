@@ -1,0 +1,24 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Url {
+  id           String         @id @default(auto()) @map("_id") @db.ObjectId
+  shortId      String         @unique
+  redirectUrl  String
+  visitHistory visitHistory[]
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+}
+
+model visitHistory {
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  timestamp Int
+  Url       Url?    @relation(fields: [urlId], references: [id])
+  urlId     String? @db.ObjectId
+}
