@@ -10,7 +10,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 
 const UrlBox = () => {
-    const siteUrl: string = process.env.SITE_URL || "http://localhost:3000/";
+    const siteUrl: string = process.env.SITE_URL || "https://url-shortner-zeta-mauve.vercel.app/";
     const [url, setUrl] = useState("");
     const [showLink, setShowLink] = useState(false);
     const [shortLink, setShortLink] = useState("");
