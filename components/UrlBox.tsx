@@ -24,7 +24,7 @@ const UrlBox = () => {
             await axios.post('/api/url', { url })
                 .then((res) => {
                     setShortLink(res.data.shortId)
-                    toast.success("Shortened Url Generated")
+                    toast.success("Short Url Generated")
                 })
                 .catch((err) => {
                     toast.error(err.message)
@@ -38,26 +38,29 @@ const UrlBox = () => {
     }
 
     return (
-        <div className='flex flex-col shadow-xl p-4 gap-6 rounded-lg text-center'>
-            <div className='flex flex-col gap-4 md:flex-row w-96'>
+        <div className='flex flex-col p-4 shadow-xl gap-6 rounded-lg text-center'>
+            <div className='flex flex-col gap-4 md:flex-row'>
                 <Input type="text" placeholder='Enter valid Url' onChange={(e) => setUrl(e.target.value)} value={url} />
                 <Button disabled={isDisabled} className={isDisabled ? "bg-gray-400" : ""} onClick={makeShorter}>Shorten</Button>
             </div>
             {
-                showLink && (<>
-                    <div className='p-2 bg-gray-100 rounded-lg flex flex-row gap-4 items-center justify-center'>
-                        <Label htmlFor='shortened-url'>{siteUrl + shortLink}</Label>
-                        <Clipboard onClick={() => {
-                            copy(siteUrl + shortLink, {
-                                message: toast.success("Copied to clipboard")
-                            })
-                        }} className='text-gray-400 hover:text-black cursor-pointer' />
+                showLink && (
+                    <div className='flex flex-col w-full gap-0 text-center mx-auto'>
+                        {/* For Short Link */}
+                        <div className='p-2 bg-gray-100 rounded-lg flex flex-row gap-4 items-center justify-center'>
+                            <Label htmlFor='shortened-url'>{siteUrl + shortLink}</Label>
+                            <Clipboard onClick={() => {
+                                copy(siteUrl + shortLink, {
+                                    message: toast.success("Copied to clipboard")
+                                })
+                            }} className='text-gray-400 hover:text-black cursor-pointer' />
+                        </div>
+                        {/* For Qr-Code */}
+                        <div className='flex flex-col items-center justify-center gap-4 py-5'>
+                            <h2 className='text-xl font-semibold'>Scan Here:</h2>
+                            <Image alt="qr-code" src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${siteUrl + shortLink}`} width={200} height={200} />
+                        </div>
                     </div>
-                    <div className='flex flex-col items-center justify-center gap-4 py-5'>
-                        <h2 className='text-xl font-semibold'>Scan Here:</h2>
-                        <Image alt="qr-code" src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${siteUrl + shortLink}`} width={200} height={200} />
-                    </div>
-                </>
                 )
             }
         </div>

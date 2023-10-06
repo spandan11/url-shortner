@@ -22,10 +22,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={poppins.className}>
-        <h1 className="text-4xl font-bold text-center mt-12">Shorter</h1>
         {children}
         <Toaster
-          position="bottom-right"
+          position="bottom-center"
           reverseOrder={false}
         /> </body>
     </html>
