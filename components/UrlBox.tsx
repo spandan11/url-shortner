@@ -12,7 +12,7 @@ import { Label } from '@/components/ui/label'
 import Image from 'next/image'
 
 const UrlBox = () => {
-    const siteUrl: string = process.env.SITE_URL || "https://url-shortner-zeta-mauve.vercel.app/";
+    const siteUrl: string = process.env.SITE_URL || "https://shorterurl.vercel.app/";
     const [url, setUrl] = useState("");
     const [showLink, setShowLink] = useState(false);
     const [isDisabled, setIsDisabled] = useState(false);
